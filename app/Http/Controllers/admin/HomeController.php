@@ -29,7 +29,7 @@ class HomeController extends Controller
             ->join('users','users.id','=','cliente.creador_id')
             ->join('correo','correo.correo_id','=','cliente.correo_id')
             ->join('servicio','servicio.servicio_id','=','precio_x_producto.servicio_id')
-            ->select('cliente.*','users.name','correo.correo_correo','servicio.servicio_nombre','precio_x_producto.precio','precio_x_producto.dispositivo')
+            ->select('cliente.*','users.name','correo.correo_correo','correo.correo_password','correo.perfil','servicio.servicio_nombre','precio_x_producto.precio','precio_x_producto.dispositivo')
             ->where('pago',0)->get();
            
 
@@ -38,7 +38,7 @@ class HomeController extends Controller
             ->join('correo','correo.correo_id','=','cliente.correo_id')
             ->join('servicio','servicio.servicio_id','=','precio_x_producto.servicio_id')
             ->where('cliente.fecha_finaliza',"<=",$fechaActual)
-            ->select('cliente.*','users.name','correo.correo_correo','servicio.servicio_nombre','precio_x_producto.precio','precio_x_producto.dispositivo')
+            ->select('cliente.*','users.name','correo.correo_correo','correo.correo_password','correo.perfil','servicio.servicio_nombre','precio_x_producto.precio','precio_x_producto.dispositivo')
             ->get();
 
 
@@ -46,7 +46,7 @@ class HomeController extends Controller
             ->join('users','users.id','=','cliente.creador_id')
             ->join('correo','correo.correo_id','=','cliente.correo_id')
             ->join('servicio','servicio.servicio_id','=','precio_x_producto.servicio_id')
-            ->select('cliente.*','users.name','correo.correo_correo','servicio.servicio_nombre','precio_x_producto.precio','precio_x_producto.dispositivo')
+            ->select('cliente.*','users.name','correo.correo_correo','correo.correo_password','correo.perfil','servicio.servicio_nombre','precio_x_producto.precio','precio_x_producto.dispositivo')
             ->where('pago',0)->where('cliente.creador_id',auth()->user()->id)->get();
 
 
@@ -56,7 +56,7 @@ class HomeController extends Controller
             ->join('servicio','servicio.servicio_id','=','precio_x_producto.servicio_id')
             ->where('cliente.fecha_finaliza',"<=",$fechaActual)
             ->where('cliente.creador_id',auth()->user()->id)
-            ->select('cliente.*','users.name','correo.correo_correo','servicio.servicio_nombre','precio_x_producto.precio','precio_x_producto.dispositivo')
+            ->select('cliente.*','users.name','correo.correo_correo','correo.correo_password','correo.perfil','servicio.servicio_nombre','precio_x_producto.precio','precio_x_producto.dispositivo')
             ->get();
 
 
@@ -68,7 +68,7 @@ class HomeController extends Controller
             ->join('users','users.id','=','cliente.creador_id')
             ->join('correo','correo.correo_id','=','cliente.correo_id')
             ->join('servicio','servicio.servicio_id','=','precio_x_producto.servicio_id')
-            ->select('cliente.*','users.name','correo.correo_correo','servicio.servicio_nombre','precio_x_producto.precio','precio_x_producto.dispositivo')
+            ->select('cliente.*','users.name','correo.correo_correo','correo.correo_password','correo.perfil','servicio.servicio_nombre','precio_x_producto.precio','precio_x_producto.dispositivo')
             ->where('pago',0)->where('cliente.creador_id',auth()->user()->id)->get();
 
            
@@ -79,7 +79,7 @@ class HomeController extends Controller
             ->join('servicio','servicio.servicio_id','=','precio_x_producto.servicio_id')
             ->where('cliente.fecha_finaliza',"<=",$fechaActual)
             ->where('cliente.creador_id',auth()->user()->id)
-            ->select('cliente.*','users.name','correo.correo_correo','servicio.servicio_nombre','precio_x_producto.precio','precio_x_producto.dispositivo')
+            ->select('cliente.*','users.name','correo.correo_correo','correo.correo_password','correo.perfil','servicio.servicio_nombre','precio_x_producto.precio','precio_x_producto.dispositivo')
             ->get();
         }
 

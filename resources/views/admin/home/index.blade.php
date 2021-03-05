@@ -48,18 +48,29 @@
           <tbody >
             @foreach ($clientesAD as $cliente)
                 <tr>
-                  <td>{{$cliente->cliente_id}}</td>
+                  <td>
+                    {{$cliente->cliente_id}}
+                  </td>
+
                   @if (Auth::user()->rol_id == '1')
-                  <td>{{$cliente->name}}</td>
+                    <td>
+                      {{$cliente->name}}
+                    </td>
                   @endif
-                  <td>{{$cliente->cliente_nombre}}</td>
+
+                  <td>
+                    {{$cliente->cliente_nombre}}
+                  </td>
+
                   <td>
                     <a href="https://web.whatsapp.com/send?phone={{$cliente->cliente_telefono}}&text=Hola {{$cliente->cliente_nombre}},&app_absent=0" target="_blank">
                       {{$cliente->cliente_telefono}}
                     </a>  
                   </td>
                   <td>{{$cliente->servicio_nombre}} {{$cliente->dispositivo}} Dispositivo por ${{$cliente->precio}}</td>
-                  <td>{{$cliente->correo_correo}}</td>
+                  <td>
+                    <a href="#" onclick="dCorreo('{{$cliente->correo_correo}}','{{$cliente->correo_password}}','{{$cliente->fecha_finaliza}}','{{$cliente->perfil}}')">{{$cliente->correo_correo}}</a>      
+                  </td>
                   <td>{{$cliente->fecha_finaliza}}</td>
                   <td>
                     <button class="btn btn-success" onclick="pagar({{$cliente->cliente_id}},'{{$cliente->cliente_nombre}}')">
@@ -146,7 +157,9 @@
                     </a>
                   </td>
                   <td>{{$ClVencido->servicio_nombre}} {{$ClVencido->dispositivo}} Dispositivo por ${{$ClVencido->precio}}</td>
-                  <td>{{$ClVencido->correo_correo}}</td>
+                  <td>
+                    <a href="#" onclick="dCorreo('{{$ClVencido->correo_correo}}','{{$ClVencido->correo_password}}','{{$ClVencido->fecha_finaliza}}','{{$ClVencido->perfil}}')">{{$ClVencido->correo_correo}}</a>      
+                  </td>
                   <td>{{$ClVencido->fecha_finaliza}}</td>
                   
                   
@@ -232,7 +245,9 @@
                       </a>  
                     </td>
                     <td>{{$cliente->servicio_nombre}} {{$cliente->dispositivo}} Dispositivo por ${{$cliente->precio}}</td>
-                    <td>{{$cliente->correo_correo}}</td>
+                    <td>
+                      <a href="#" onclick="dCorreo('{{$cliente->correo_correo}}','{{$cliente->correo_password}}','{{$cliente->fecha_finaliza}}','{{$cliente->perfil}}')">{{$cliente->correo_correo}}</a>      
+                    </td>
                     <td>{{$cliente->fecha_finaliza}}</td>
                     <td>
                       <button class="btn btn-success" onclick="pagar({{$cliente->cliente_id}},'{{$cliente->cliente_nombre}}')">
@@ -321,7 +336,9 @@
                       </a>
                     </td>
                     <td>{{$ClVencido->servicio_nombre}} {{$ClVencido->dispositivo}} Dispositivo por ${{$ClVencido->precio}}</td>
-                    <td>{{$ClVencido->correo_correo}}</td>
+                    <td>
+                      <a href="#" onclick="dCorreo('{{$ClVencido->correo_correo}}','{{$ClVencido->correo_password}}','{{$ClVencido->fecha_finaliza}}','{{$ClVencido->perfil}}')">{{$ClVencido->correo_correo}}</a>      
+                    </td>
                     <td>{{$ClVencido->fecha_finaliza}}</td>
                     
                     
@@ -496,21 +513,6 @@
 @endif
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
      <!-- Modal Usuarios -->
      <div class="modal fade" id="modal-listarUser">
       <div class="modal-dialog modal-lg">
@@ -554,6 +556,34 @@
     <!-- /.modal-dialog -->
   </div>
   <!-- /.modal --> 
+
+
+
+
+    <!-- Modal ver correo -->
+    <div class="modal fade" id="modal-Correo">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Datos del correo</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              
+              <h4><b>Correo:</b>  <span id="vCorreo"></span></h4>
+              <h4><b>Contraseña:</b>  <span id="vContra"></span></h4>
+              <h4><b>Perfiles libres:</b>  <span id="vPerfil"></span></h4>
+              <h4><b>Fecha finaliza:</b>  <span id="vFecha"></span></h4>
+              
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 @endsection
 
 @section('js')
@@ -674,5 +704,15 @@
       };
       $.datepicker.setDefaults($.datepicker.regional['es']);
       $("#fecha").datepicker();
+
+      //Mostrar datos del correo
+      function dCorreo(correo,password,fecha,perfil) {
+        $("#vCorreo").text(correo);
+        $("#vContra").text(password);
+        $("#vPerfil").text(perfil);
+        $("#vFecha").text(fecha);
+        
+        $("#modal-Correo").modal("show");
+      }
     </script>
 @endsection
