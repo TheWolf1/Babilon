@@ -24,7 +24,8 @@ class ClienteController extends Controller
             $clientes = Cliente::join('precio_x_producto','precio_x_producto.pxp_id','=','cliente.servicio_id')
             ->join('users','users.id','=','cliente.creador_id')
             ->join('correo','correo.correo_id','=','cliente.correo_id')
-            ->join('servicio','servicio.servicio_id','=','precio_x_producto.servicio_id')->select('users.name','precio_x_producto.dispositivo','precio_x_producto.precio','servicio.servicio_nombre','cliente.*','correo.correo_correo')
+            ->join('servicio','servicio.servicio_id','=','precio_x_producto.servicio_id')
+            ->select('users.name','precio_x_producto.dispositivo','precio_x_producto.precio','servicio.servicio_nombre','cliente.*','correo.correo_correo','correo.correo_password','correo.perfil')
             ->where('pago',1)
             ->get();
             $pxps = PrecioPorProducto::join('servicio','servicio.servicio_id','=','precio_x_producto.servicio_id')->select('precio_x_producto.*','servicio.servicio_nombre')->get();
@@ -32,7 +33,8 @@ class ClienteController extends Controller
             $clientes = Cliente::join('precio_x_producto','precio_x_producto.pxp_id','=','cliente.servicio_id')
             ->join('users','users.id','=','cliente.creador_id')
             ->join('correo','correo.correo_id','=','cliente.correo_id')
-            ->join('servicio','servicio.servicio_id','=','precio_x_producto.servicio_id')->select('users.name','precio_x_producto.dispositivo','precio_x_producto.precio','servicio.servicio_nombre','cliente.*','correo.correo_correo')
+            ->join('servicio','servicio.servicio_id','=','precio_x_producto.servicio_id')
+            ->select('users.name','precio_x_producto.dispositivo','precio_x_producto.precio','servicio.servicio_nombre','cliente.*','correo.correo_correo','correo.correo_password','correo.perfil')
             ->where('pago',1)
             ->where('cliente.creador_id',auth()->user()->id)->get();
             $pxps = PrecioPorProducto::join('servicio','servicio.servicio_id','=','precio_x_producto.servicio_id')->select('precio_x_producto.*','servicio.servicio_nombre')->get();

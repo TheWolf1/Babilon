@@ -52,7 +52,9 @@
                       </a>
                     </td>
                     <td>{{$cliente->servicio_nombre}} {{$cliente->dispositivo}} Dispositivo por ${{$cliente->precio}}</td>
-                    <td>{{$cliente->correo_correo}}</td>
+                    <td>
+                      <a href="#" onclick="dCorreo('{{$cliente->correo_correo}}','{{$cliente->correo_password}}','{{$cliente->fecha_finaliza}}','{{$cliente->perfil}}')">{{$cliente->correo_correo}}</a>      
+                    </td>
                     <td>{{$cliente->fecha_finaliza}}</td>
                     
                     <td>
@@ -148,7 +150,30 @@
 
  
 
-
+    <!-- Modal ver correo -->
+    <div class="modal fade" id="modal-Correo">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Datos del correo</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              
+              <h4><b>Correo:</b>  <span id="vCorreo"></span></h4>
+              <h4><b>Contraseña:</b>  <span id="vContra"></span></h4>
+              <h4><b>Perfiles libres:</b>  <span id="vPerfil"></span></h4>
+              <h4><b>Fecha finaliza:</b>  <span id="vFecha"></span></h4>
+              
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 
 
 
@@ -228,5 +253,15 @@
       $("#listarUsers").click(()=>{
         $("#modal-listarUser").modal('show');
       });
+      
+      //Mostrar datos del correo
+      function dCorreo(correo,password,fecha,perfil) {
+        $("#vCorreo").text(correo);
+        $("#vContra").text(password);
+        $("#vPerfil").text(perfil);
+        $("#vFecha").text(fecha);
+        
+        $("#modal-Correo").modal("show");
+      }
     </script>
 @endsection
