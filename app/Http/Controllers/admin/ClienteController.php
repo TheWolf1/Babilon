@@ -138,8 +138,7 @@ class ClienteController extends Controller
         $Idc= auth()->user()->id;
         $fechaActual = Carbon::createFromDate()->toDateString();
         $fechaUnMes = Carbon::createFromDate()->addMonth();
-        Cliente::where('fecha_finaliza',"<=",$fechaActual)->where('creador_id',$Idc)->update([
-            'fecha_finaliza' => $fechaUnMes,
+        Cliente::Join('correo','correo.correo_id','=','cliente.correo_id')->where('correo.fecha_finaliza',"<=",$fechaActual)->where('cliente.creador_id',$Idc)->update([
             'pago'=>0
         ]);
         return redirect('admin/home');
