@@ -25,7 +25,7 @@ class ClienteController extends Controller
             ->join('users','users.id','=','cliente.creador_id')
             ->join('correo','correo.correo_id','=','cliente.correo_id')
             ->join('servicio','servicio.servicio_id','=','precio_x_producto.servicio_id')
-            ->select('users.name','precio_x_producto.dispositivo','precio_x_producto.precio','servicio.servicio_nombre','cliente.*','correo.correo_correo','correo.correo_password','correo.perfil')
+            ->select('users.name','precio_x_producto.dispositivo','precio_x_producto.precio','servicio.servicio_nombre','cliente.*','correo.*')
             ->where('pago',1)
             ->get();
             $pxps = PrecioPorProducto::join('servicio','servicio.servicio_id','=','precio_x_producto.servicio_id')->select('precio_x_producto.*','servicio.servicio_nombre')->get();
@@ -34,7 +34,7 @@ class ClienteController extends Controller
             ->join('users','users.id','=','cliente.creador_id')
             ->join('correo','correo.correo_id','=','cliente.correo_id')
             ->join('servicio','servicio.servicio_id','=','precio_x_producto.servicio_id')
-            ->select('users.name','precio_x_producto.dispositivo','precio_x_producto.precio','servicio.servicio_nombre','cliente.*','correo.correo_correo','correo.correo_password','correo.perfil')
+            ->select('users.name','precio_x_producto.dispositivo','precio_x_producto.precio','servicio.servicio_nombre','cliente.*','correo.*')
             ->where('pago',1)
             ->where('cliente.creador_id',auth()->user()->id)->get();
             $pxps = PrecioPorProducto::join('servicio','servicio.servicio_id','=','precio_x_producto.servicio_id')->select('precio_x_producto.*','servicio.servicio_nombre')->get();

@@ -21,7 +21,6 @@ class CrearTablaCliente extends Migration
             $table->unsignedBigInteger('servicio_id');
             $table->unsignedBigInteger('correo_id');
             $table->boolean('pago');
-            $table->date('fecha_finaliza');
             $table->timestamps();
 
             $table->foreign('creador_id','cliente_creador_fk')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');
