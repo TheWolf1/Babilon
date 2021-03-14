@@ -66,7 +66,7 @@ class ClienteController extends Controller
         ->Where('perfil','>=',$dispositivo)
         ->where('fecha_finaliza','>=',$fechaMes)
         ->where('fecha_finaliza','<=',$fechaMesMasCinco)
-        ->orderBy('correo_id')->get()->first();
+        ->orderBy('perfil','ASC')->get()->first();
 
 
         
@@ -101,7 +101,6 @@ class ClienteController extends Controller
             $cliente->servicio_id = $request['servicio'];
             $cliente->correo_id = $correo_id;
             $cliente->pago = $pagado;
-            $cliente->fecha_finaliza = $fecha_finaliza;
             $cliente->save();
 
             $perfilesL = Correo::where('correo_id',$correo_id)->select('perfil')->get()->first();
@@ -139,6 +138,19 @@ class ClienteController extends Controller
         $fechaActual = Carbon::createFromDate()->toDateString();
         $fechaUnMes = Carbon::createFromDate()->addMonth();
         Cliente::Join('correo','correo.correo_id','=','cliente.correo_id')->where('correo.fecha_finaliza',"<=",$fechaActual)->where('cliente.creador_id',$Idc)->update([
+            'pago'=>0
+        ]);
+        return redirect('admin/home');
+    }
+
+
+    public function PasarNoPagosAll()
+    {
+        //
+        $Idc= auth()->user()->id;
+        $fechaActual = Carbon::createFromDate()->toDateString();
+        $fechaUnMes = Carbon::createFromDate()->addMonth();
+        Cliente::Join('correo','correo.correo_id','=','cliente.correo_id')->where('correo.fecha_finaliza',"<=",$fechaActual)->update([
             'pago'=>0
         ]);
         return redirect('admin/home');

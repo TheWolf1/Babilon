@@ -43,6 +43,7 @@ Route::group(['prefix' => 'admin', 'namespace'=>'admin', 'middleware' =>'auth'],
     Route::post('/cliente','ClienteController@create')->name('crear_cliente');
     Route::post('/cliente/eliminar', 'ClienteController@eliminar')->name('eliminar_cliente');
     Route::get('cliente/PasarNoPagos','ClienteController@PasarNoPagos')->name('pasar_noPagos');
+    Route::get('cliente/PasarNoPagos/Todos','ClienteController@PasarNoPagosAll')->name('pasar_noPagosAll');
 
 
     Route::get('/ingresos', 'IngresoController@index')->name('ingresos');

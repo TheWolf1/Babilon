@@ -214,7 +214,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body table-responsive p-0">
-          <table class="table table-hover text-nowrap DataTable" id="tblClientes">
+          <table class="table table-hover text-nowrap DataTable" id="tblClientesAll">
             <thead>
               <tr>
                 <th>ID</th>
@@ -297,14 +297,15 @@
 
           <div class="card-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
-              @if (Auth::user()->rol_id != '1')
-              <a href="{{route('pasar_noPagos')}}"class="btn btn-danger">Pasar a no pagos</a>
-              @endif
+              
+              <a href="{{route('pasar_noPagosAll')}}"class="btn btn-danger">Pasar a no pagos</a>
+              
             </div>
           </div>
         </div>
         <!-- /.card-header -->
         <div class="card-body table-responsive p-0">
+          
           <table class="table table-hover text-nowrap DataTable" >
             <thead class="table-dark">
               <tr>
@@ -455,7 +456,6 @@
             *************************
             <p>Con estos datos puedes ingresar a tu cuenta de Netflix.
               Recuerda que solo puedes conectarte desde <span id="PerfilesCliente"></span> Dispositivo/s en caso de que te llegues a conectar de más dispositivos la cuenta se te bloquea y no la puedes usar más por esta razón no compartas tu usuario y contraseña.
-              También recuerda que esta totalmente prohibido cambiar algún dato de la cuenta y en caso de que lo hagas se te quitará la cuenta y no la podrás usar más. 
               </p>
          
           </div>
